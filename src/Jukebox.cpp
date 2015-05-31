@@ -19,20 +19,19 @@ void Jukebox::run() const{
 }
 
 void Jukebox::showMenu() const{
-    cout << "**** FILE ****" << endl;
+    cout << "**** JUKEBOX ****";
     int selection = 0;
     bool active = true;
-    cout << "Welcome to the personnel register" << endl;
     while(active){
         cout << endl << "1. File...\n"
                 "2. Add an album\n"
                 "3. Delete an album\n"
                 "4. Print...\n"
                 "5. Play...\n"
-                "6. Exit\n"
-                "Choose an alternative: ";
+                "6. Exit\n\n"
+                "My choice: ";
         cin >> selection;
-        while(cin.fail() || selection < 1 || selection > 8){
+        while(cin.fail() || selection < 1 || selection > 6){
             cin.clear();
             cin.ignore(256,'\n');
             cout << "You have to enter a valid choice. Please enter your selection again: ";
@@ -41,30 +40,24 @@ void Jukebox::showMenu() const{
         cout << endl;
         switch (selection){
         case 1:
-//            addPerson();
+//            file();
             break;
         case 2:
-//            printList();
+//            addAlbum();
             break;
         case 3:
-//            writeToFile();
+//            deleteAlbum();
             break;
         case 4:
-//            readFromFile();
+//            print();
             break;
         case 5:
-//            sortName();
+//            play();
             break;
         case 6:
-//            sortPersNr();
-            break;
-        case 7:
-//            sortShoeSize();
-            break;
-        case 8:
-            active = false;
+//            exit();
             break;
         }
     }
-    cout << "Thanks for using personnel register" << endl;
+    cout << "Thanks for using JukeBox" << endl;
 }
