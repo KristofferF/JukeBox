@@ -11,32 +11,32 @@
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
 MenuItem::MenuItem(){
-    text = "";
+    menuText = "";
     enabled = "false";
 }
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
-MenuItem::MenuItem(string text, bool enabled){
-    this->text = text;
+MenuItem::MenuItem(string menuText, bool enabled){
+    this->menuText = menuText;
     this->enabled = enabled;
 }
 
 //------------------------------------------------------------------------------
 // setText
-// Datamedlemmen text ges värdet av parametern text
+// Datamedlemmen text ges värdet av parametern menuText
 //------------------------------------------------------------------------------
-void MenuItem::setText(string text){
-    this->text = text;
+void MenuItem::setMenuText(string menuText){
+    this->menuText = menuText;
 }
 
 //------------------------------------------------------------------------------
 // getText
-// Returnerar datamedlemmen text
+// Returnerar datamedlemmen menuText
 //------------------------------------------------------------------------------
-string MenuItem::getText() const{
-    return text;
+string MenuItem::getMenuText() const{
+    return menuText;
 }
 
 //------------------------------------------------------------------------------

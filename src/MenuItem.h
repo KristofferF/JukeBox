@@ -13,14 +13,14 @@ using namespace std;
 
 class MenuItem{
 private:
-    string text;
+    string menuText;
     bool enabled;
 
 public:
     MenuItem();
-    MenuItem(string text, bool enabled;
-    void setText(string text);
-    string getText() const;
+    MenuItem(string text, bool enabled);
+    void setMenuText(string text);
+    string getMenuText() const;
     void setEnabled(bool enabled);
     bool getEnabled() const;
 };

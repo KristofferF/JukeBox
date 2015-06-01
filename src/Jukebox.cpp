@@ -7,16 +7,91 @@
 
 #include"Jukebox.h"
 
+void showMenu();
+
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
 Jukebox::Jukebox(){
+    mainMenu.setLabel("JUKE BOX");
+    mainMenu.addItem("File...", true);
+    mainMenu.addItem("Add an album", false);
+    mainMenu.addItem("Delete an album", false);
+    mainMenu.addItem("Print...", false);
+    mainMenu.addItem("Play...", false);
+    mainMenu.addItem("Exit", true);
 
+    fileMenu.setLabel("FILE");
+    fileMenu.addItem("Open", true);
+    fileMenu.addItem("Save", false);
+    fileMenu.addItem("Back to main menu", true);
+
+    printMenu.setLabel("PRINT");
+    printMenu.addItem("Print one album", true);
+    printMenu.addItem("Print all sorted by album name", true);
+    printMenu.addItem("Print all sorted by album total time", true);
+    printMenu.addItem("Print simple sorted by album name", true);
+    printMenu.addItem("Print simple sorted by album total time", true);
+    printMenu.addItem("Back to main menu", true);
+
+    playMenu.setLabel("PLAY");
+    playMenu.addItem("Create a play list from songs", true);
+    playMenu.addItem("Create a random list", true);
+    playMenu.addItem("Play list", true);
+    playMenu.addItem("Back to main menu", true);
 }
 
-void Jukebox::run() const{
-    showMenu();
+void Jukebox::run(){
+
+    //showMenu();
+
+    bool again = true;
+    do{
+        mainMenu.printMenuItems();
+        switch(mainMenu.getMenuChoices()){
+            case 1:
+                file();
+                break;
+            case 2:
+                addAlbum();
+                break;
+            case 3:
+                removeAlbum();
+                break;
+            case 4:
+                print();
+                break;
+            case 5:
+                play();
+                break;
+            case 6:
+                again = false;
+                break;
+        }
+    }while(again);
 }
+
+void Jukebox::file(){
+    cout << "file" << endl;
+}
+
+void Jukebox::addAlbum(){
+    cout << "add album" << endl;
+}
+
+void Jukebox::removeAlbum(){
+    cout << "remove album" << endl;
+}
+
+void Jukebox::print(){
+    cout << "print" << endl;
+}
+
+void Jukebox::play(){
+    cout << "play" << endl;
+}
+
+
 
 void Jukebox::showMenu() const{
     cout << "**** JUKEBOX ****";

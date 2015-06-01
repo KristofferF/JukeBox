@@ -12,16 +12,28 @@
 #include<iostream>
 #include<vector>
 #include"Album.h"
+#include"Menu.h"
 using namespace std;
 
 class Jukebox{
 private:
     vector<Album> albums;
+    Menu mainMenu;
+    Menu fileMenu;
+    Menu printMenu;
+    Menu playMenu;
+
     void showMenu() const;
+    void file();
+    void addAlbum();
+    void removeAlbum();
+    void print();
+    void play();
 
 public:
     Jukebox();
-    void run() const;
+    void run();
+
 };
 
 #endif /* SRC_JUKEBOX_H_ */
