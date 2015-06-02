@@ -12,6 +12,7 @@
 class Menu{
 private:
     vector<MenuItem> menuItems;
+    vector<MenuItem> selectableMenuItems;
     string label;
 public:
     Menu();

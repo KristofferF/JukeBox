@@ -42,9 +42,6 @@ Jukebox::Jukebox(){
 }
 
 void Jukebox::run(){
-
-    //showMenu();
-
     bool again = true;
     do{
         mainMenu.printMenuItems();
@@ -69,10 +66,33 @@ void Jukebox::run(){
                 break;
         }
     }while(again);
+    cout << "Thanks for using JukeBox" << endl;
 }
 
 void Jukebox::file(){
-    cout << "file" << endl;
+    bool again = true;
+    do{
+        fileMenu.printMenuItems();
+        switch(fileMenu.getMenuChoices()){
+            case 1:
+                open();
+                break;
+            case 2:
+                save();
+                break;
+            case 3:
+                again = false;
+                break;
+        }
+    }while(again);
+}
+
+void Jukebox::open(){
+
+}
+
+void Jukebox::save(){
+
 }
 
 void Jukebox::addAlbum(){
@@ -84,11 +104,51 @@ void Jukebox::removeAlbum(){
 }
 
 void Jukebox::print(){
-    cout << "print" << endl;
+    bool again = true;
+    do{
+        printMenu.printMenuItems();
+        switch(printMenu.getMenuChoices()){
+            case 1:
+                cout << "1";
+                break;
+            case 2:
+                cout << "2";
+                break;
+            case 3:
+                cout << "3";
+                break;
+            case 4:
+                cout << "4";
+                break;
+            case 5:
+                cout << "5";
+                break;
+            case 6:
+                again = false;
+                break;
+        }
+    }while(again);
 }
 
 void Jukebox::play(){
-    cout << "play" << endl;
+    bool again = true;
+    do{
+        playMenu.printMenuItems();
+        switch(playMenu.getMenuChoices()){
+            case 1:
+                cout << "1";
+                break;
+            case 2:
+                cout << "2";
+                break;
+            case 3:
+                cout << "3";
+                break;
+            case 4:
+                again = false;
+                break;
+        }
+    }while(again);
 }
 
 
@@ -134,5 +194,5 @@ void Jukebox::showMenu() const{
             break;
         }
     }
-    cout << "Thanks for using JukeBox" << endl;
+
 }

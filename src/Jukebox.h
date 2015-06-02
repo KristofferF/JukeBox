@@ -25,6 +25,8 @@ private:
 
     void showMenu() const;
     void file();
+    void open();
+    void save();
     void addAlbum();
     void removeAlbum();
     void print();

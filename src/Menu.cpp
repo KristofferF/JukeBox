@@ -14,17 +14,17 @@ Menu::Menu() {
 }
 
 void Menu::addItem(string menuText, bool enabled){
-
+    menuItems.push_back(MenuItem(menuText, enabled));
 }
 
 void Menu::printMenuItems(){
     cout << LABEL_PREFIX << label << LABEL_SUFFIX << endl;
-    //int i = 1;
-    for (int i = 0; i < 3; i++){
-        cout << i << ". " << menuItems[i].getMenuText() << endl;
-//        if (item.getEnabled()){
-//            cout << i << ". " << item.getMenuText() << endl;
-//        }
+    selectableMenuItems.clear();
+    for (auto item: menuItems){
+        if (item.getEnabled()){
+            selectableMenuItems.push_back(item);
+            cout << selectableMenuItems.size() << ". " << item.getMenuText() << endl;
+        }
     }
 }
 
@@ -32,13 +32,19 @@ size_t Menu::getMenuChoices(){
     size_t selection = 0;
     cout << "My choice: ";
     cin >> selection;
-    while(cin.fail() || selection < 1 || selection > menuItems.size()+1){
+    while(cin.fail() || selection < 1 || selection > selectableMenuItems.size()){
         cin.clear();
         cin.ignore(256,'\n');
         cout << "You have to enter a valid choice. Please enter your selection again: ";
         cin >> selection;
     }
-    return selection;
+    size_t i = 0;
+    for (auto item: menuItems){
+        i++;
+        if (item.getMenuText() == selectableMenuItems[selection-1].getMenuText()){
+            return i;
+        }
+    }
 }
 
 void Menu::setLabel(string label) {
