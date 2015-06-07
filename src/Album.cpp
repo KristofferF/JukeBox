@@ -7,12 +7,17 @@
 
 #include "Album.h"
 #include <fstream>
+#include <iomanip>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
 Album::Album() {
 
+}
+
+void Album::setTitle(string title){
+    this->title = title;
 }
 
 //------------------------------------------------------------------------------
@@ -30,6 +35,22 @@ ostream &operator<<(ostream &os, const Album &album) {
 //
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Album &album) {
+    Song song;
+    string title;
+    getline(is, title, '\n');
+    album.setTitle(title);
+    cout << title << " 1 " << title.length() << endl;
+
+    string size;
+    getline(is, size, '\n');
+    int sizes = stoi(size);
+    cout << sizes << endl;
+
+    string tmp;
+    getline(is, tmp, '|');
+    cout << tmp << " 3 " << tmp.length() << endl;
+    getline(is, tmp, '|');
+    cout << tmp << " 4 " << tmp.length() << endl;
 //    Name tmpName;
 //    Address tmpAddress;
 //    string tmpPersNr;

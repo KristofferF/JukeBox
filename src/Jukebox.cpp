@@ -93,9 +93,8 @@ void Jukebox::open(){
     albums.clear();
     fstream inFile(fileName, ios::in);
     Album tmpAlbum;
-    while(inFile >> tmpAlbum){
-        addAlbum(tmpAlbum);
-    }
+    inFile >> tmpAlbum;
+    addAlbum(tmpAlbum);
     inFile.close();
 }
 

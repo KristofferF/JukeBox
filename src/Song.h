@@ -9,6 +9,7 @@
 #define SRC_SONG_H_
 
 #include <string>
+#include "Time.h"
 using namespace std;
 
 class Song{

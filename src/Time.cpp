@@ -5,6 +5,10 @@
  *      Author: Kristoffer Freiholtz
  */
 
+#include "TIme.h"
 
+Time::Time(){
+
+}
 
 
