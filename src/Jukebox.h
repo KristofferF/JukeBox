@@ -8,11 +8,11 @@
 #ifndef SRC_JUKEBOX_H_
 #define SRC_JUKEBOX_H_
 
-//#include<string>
-#include<iostream>
-#include<vector>
-#include"Album.h"
-#include"Menu.h"
+#include <string>
+#include <iostream>
+#include <vector>
+#include "Album.h"
+#include "Menu.h"
 using namespace std;
 
 class Jukebox{
@@ -22,12 +22,13 @@ private:
     Menu fileMenu;
     Menu printMenu;
     Menu playMenu;
+    string fileName;
 
     void showMenu() const;
     void file();
     void open();
     void save();
-    void addAlbum();
+    void addAlbum(Album album);
     void removeAlbum();
     void print();
     void play();

@@ -5,9 +5,9 @@
  *      Author: Kristoffer
  */
 
-#include"Jukebox.h"
-
-void showMenu();
+#include "Jukebox.h"
+#include <algorithm>
+#include <fstream>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
@@ -23,7 +23,7 @@ Jukebox::Jukebox(){
 
     fileMenu.setLabel("FILE");
     fileMenu.addItem("Open", true);
-    fileMenu.addItem("Save", false);
+    fileMenu.addItem("Save", true);
     fileMenu.addItem("Back to main menu", true);
 
     printMenu.setLabel("PRINT");
@@ -39,6 +39,8 @@ Jukebox::Jukebox(){
     playMenu.addItem("Create a random list", true);
     playMenu.addItem("Play list", true);
     playMenu.addItem("Back to main menu", true);
+
+    fileName = "jukebox.txt";
 }
 
 void Jukebox::run(){
@@ -50,7 +52,7 @@ void Jukebox::run(){
                 file();
                 break;
             case 2:
-                addAlbum();
+                //addAlbum();
                 break;
             case 3:
                 removeAlbum();
@@ -88,14 +90,22 @@ void Jukebox::file(){
 }
 
 void Jukebox::open(){
-
+    albums.clear();
+    fstream inFile(fileName, ios::in);
+    Album tmpAlbum;
+    while(inFile >> tmpAlbum){
+        addAlbum(tmpAlbum);
+    }
+    inFile.close();
 }
 
 void Jukebox::save(){
-
+    fstream outFile(fileName, ios::out);
+    outFile << "Hey" << endl;
+    outFile.close();
 }
 
-void Jukebox::addAlbum(){
+void Jukebox::addAlbum(Album album){
     cout << "add album" << endl;
 }
 
