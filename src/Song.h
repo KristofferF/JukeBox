@@ -20,9 +20,14 @@ private:
 
 public:
     Song();
+    Song(string title, string artist, int length);
+    string getTitle() const;
+    string getArtist() const;
+    int getLength() const;
+
 };
 
-//ostream &operator<<(ostream &os, const Album &person);
+ostream &operator<<(ostream &os, const Song &song);
 //istream &operator>>(istream &is, Album &person);
 
 #endif /* SRC_SONG_H_ */

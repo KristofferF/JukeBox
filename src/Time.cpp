@@ -5,9 +5,13 @@
  *      Author: Kristoffer Freiholtz
  */
 
-#include "TIme.h"
+#include "Time.h"
 
 Time::Time(){
+
+}
+
+Time::Time(int seconds){
 
 }
 

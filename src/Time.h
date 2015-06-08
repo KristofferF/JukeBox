@@ -16,6 +16,7 @@ private:
 
 public:
     Time();
+    Time(int seconds);
 
 };
 

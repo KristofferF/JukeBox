@@ -96,6 +96,7 @@ void Jukebox::open(){
     inFile >> tmpAlbum;
     addAlbum(tmpAlbum);
     inFile.close();
+    tmpAlbum.printAll();
 }
 
 void Jukebox::save(){
@@ -193,7 +194,8 @@ void Jukebox::showMenu() const{
 //            deleteAlbum();
             break;
         case 4:
-//            print();
+
+
             break;
         case 5:
 //            play();
