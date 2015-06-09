@@ -7,6 +7,8 @@
 
 #include"Jukebox.h"
 
+#include "Time.h"
+
 int main() {
     Jukebox jukebox;
     jukebox.run();

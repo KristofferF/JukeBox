@@ -23,8 +23,11 @@ private:
 public:
     Album();
     void setTitle(string title);
-    void addSong(string title, string artist, int length);
-    void printAll();
+    string getTitle() const;
+    size_t getSize() const;
+    vector<Song> getSongs() const;
+    void addSong(Song song);
+    void printAll() const;
 };
 
 ostream &operator<<(ostream &os, const Album &person);

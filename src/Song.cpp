@@ -8,14 +8,10 @@
 #include "Song.h"
 #include <iostream>
 
+const char DELIM = '|';
+
 Song::Song(){
-
-}
-
-Song::Song(string title, string artist, int length){
-    this->title = title;
-    this->artist = artist;
-    this->length = Time(length);
+    length = new Time();
 }
 
 string Song::getTitle() const{
@@ -26,11 +22,35 @@ string Song::getArtist() const{
     return artist;
 }
 
-int Song::getLength() const{
-    return 35;
+Time* Song::getTime() const{
+    return length;
 }
 
+void Song::setTitle(string title){
+    this->title = title;
+}
+
+void Song::setArtist(string artist){
+    this->artist = artist;
+}
+
+
 ostream &operator<<(ostream &os, const Song &song){
-        os << song.getTitle() << " " << song.getArtist() << " " << song.getLength();
-        return os;
+    os << song.getTitle() << DELIM << song.getArtist() << DELIM << (*song.getTime()) << endl;
+    return os;
+}
+
+//------------------------------------------------------------------------------
+// overloaded >> operator
+//
+//------------------------------------------------------------------------------
+istream &operator>>(istream &is, Song &song) {
+    string tmpTitle;
+    string tmpArtist;
+    getline(is, tmpTitle, DELIM);
+    song.setTitle(tmpTitle);
+    getline(is, tmpArtist, DELIM);
+    song.setArtist(tmpArtist);
+    is >> (*song.getTime());
+    return is;
 }

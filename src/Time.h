@@ -19,9 +19,11 @@ private:
 
 public:
     Time();
-    Time(int seconds);
     int getTime() const;
     void setTime(int seconds);
+    bool operator==(const Time &time) const;
+    bool operator<(const Time &time) const;
+    Time operator+(const Time &time) const;
 
 };
 

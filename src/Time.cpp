@@ -6,20 +6,15 @@
  */
 
 #include "Time.h"
+#include <stdlib.h>
 
 const int SEC_PER_HOUR = 3600;
 const int SEC_PER_MIN = 60;
 
 Time::Time(){
-
-}
-
-Time::Time(int seconds){
-    hours = seconds/SEC_PER_HOUR;
-    seconds = seconds%SEC_PER_HOUR;
-    minutes = seconds/SEC_PER_MIN;
-    seconds = seconds%SEC_PER_MIN;
-    this->seconds = seconds;
+    hours = 0;
+    minutes = 0;
+    seconds = 0;
 }
 
 int Time::getTime() const{
@@ -27,7 +22,41 @@ int Time::getTime() const{
 }
 
 void Time::setTime(int seconds){
+    hours = seconds/SEC_PER_HOUR;
+    seconds = seconds%SEC_PER_HOUR;
+    minutes = seconds/SEC_PER_MIN;
+    seconds = seconds%SEC_PER_MIN;
+    this->seconds = seconds;
+}
 
+//------------------------------------------------------------------------------
+// overloaded == operator
+//
+//------------------------------------------------------------------------------
+bool Time::operator==(const Time &time) const {
+    return getTime() == time.getTime();
+}
+
+//------------------------------------------------------------------------------
+// overloaded < operator
+//
+//------------------------------------------------------------------------------
+bool Time::operator<(const Time &time) const {
+    if (getTime() < time.getTime()) {
+        return true;
+    }
+    return false;
+}
+
+//------------------------------------------------------------------------------
+// overloaded + operator
+//
+//------------------------------------------------------------------------------
+Time Time::operator+(const Time &time) const{
+    int seconds = getTime() + time.getTime();
+    Time newTime;
+    newTime.setTime(seconds);
+    return newTime;
 }
 
 //------------------------------------------------------------------------------

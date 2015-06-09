@@ -24,7 +24,6 @@ private:
     Menu playMenu;
     string fileName;
 
-    void showMenu() const;
     void file();
     void open();
     void save();
