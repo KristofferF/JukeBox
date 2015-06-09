@@ -8,6 +8,9 @@
 #ifndef SRC_TIME_H_
 #define SRC_TIME_H_
 
+using namespace std;
+#include <iostream>
+
 class Time{
 private:
     int hours;
@@ -17,9 +20,12 @@ private:
 public:
     Time();
     Time(int seconds);
+    int getTime() const;
+    void setTime(int seconds);
 
 };
 
-
+ostream &operator<<(ostream &os, const Time &time);
+istream &operator>>(istream &is, Time &time);
 
 #endif /* SRC_TIME_H_ */
