@@ -112,7 +112,6 @@ void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
 void Jukebox::save(){
     cout << "save" << endl;
     fstream outFile("test.txt", ios::out);
-
     for (auto& album : albums){
         outFile << album;
     }
@@ -135,10 +134,11 @@ void Jukebox::print(){
         switch(printMenu.getMenuChoices()){
             case 1:
                 cout << "Print one album";
-
+                printAlbum();
                 break;
             case 2:
-                cout << "Print all sorted by album name";
+                cout << "Print all sorted by album name" << endl;
+                printSortedAlbums();
                 break;
             case 3:
                 cout << "Print all sorted by album total time";
@@ -157,24 +157,59 @@ void Jukebox::print(){
 }
 
 //------------------------------------------------------------------------------
-// getInput
-// Låter användaren mata in sökt album.
+// printAlbum
+// Låter användaren mata in sökt album och skriver ut det om det finns i listan med album.
 //------------------------------------------------------------------------------
 void Jukebox::printAlbum() {
     cout << "Enter album name to look for: ";
     string searchName;
-    cin >> searchName;
-    while (cin.fail()) {
-        cin.clear();
-        cin.ignore(256, '\n');
-        cout << "Failed to read your input. Try again: ";
-        cin >> searchName;
+    bool found = false;
+    cin.ignore();
+    getline(cin, searchName);
+    cout << searchName << endl;
+    for (auto& album : albums){
+        if (album.getTitle() == searchName){
+            cout << album << endl;
+            found = true;
+            break;
+        }
     }
+    if(!found){
+        cout << "Couldn´t find album. Maybee you misspelled." << endl;
+    }
+}
 
-    for (const auto& album : albums){
-        if (album.get)
-        cout << album;
+//------------------------------------------------------------------------------
+// printSortedAlbums
+// Skriver ut albumen i en sorterad ordning
+//------------------------------------------------------------------------------
+void Jukebox::printSortedAlbums() {
+    vector<Album> sortedAlbums(albums);
 
+    sort(sortedAlbums.begin(), sortedAlbums.end());
+
+    for (auto& album : albums) {
+        cout << album << endl;
+    }
+    for (auto& album : sortedAlbums) {
+        cout << album << endl;
+    }
+}
+
+
+//------------------------------------------------------------------------------
+// printSortedAlbumsTime
+// Skriver ut albumen i en sorterad ordning
+//------------------------------------------------------------------------------
+void Jukebox::printSortedAlbumsTime() {
+    vector<Album> sortedAlbums(albums);
+    sort(sortedAlbums.begin(), sortedAlbums.end());
+
+    for (auto& album : albums) {
+        cout << "hej" << album << endl;
+    }
+    for (auto& album : sortedAlbums) {
+        cout << album << endl;
     }
 }
 

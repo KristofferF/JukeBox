@@ -43,6 +43,13 @@ void Album::printAll() const{
     }
 }
 
+bool Album::operator<(const Album &album) const{
+    if (getTitle() < album.getTitle()) {
+        return true;
+    }
+    return false;
+}
+
 //------------------------------------------------------------------------------
 // overloaded << operator
 //
@@ -61,11 +68,14 @@ ostream &operator<<(ostream &os, const Album &album) {
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Album &album) {
     string title;
-    getline(is, title, '\n');
+    getline(is, title, '\r');
+    is.ignore();
     album.setTitle(title);
 
     string tmpSize;
-    getline(is, tmpSize, '\n');
+
+    getline(is, tmpSize, '\r');
+    is.ignore(); // TODO can it bee \r\n instead? same in time class
     // TODO stoi instead
     int size = atoi(tmpSize.c_str());
 

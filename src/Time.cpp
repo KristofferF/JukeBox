@@ -74,7 +74,8 @@ ostream &operator<<(ostream &os, const Time &time) {
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Time &time) {
     string tmpLength;
-    getline(is, tmpLength, '\n');
+    getline(is, tmpLength, '\r');
+    is.ignore();
     time.setTime(atoi(tmpLength.c_str()));
     return is;
 }

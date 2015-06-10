@@ -32,6 +32,8 @@ private:
     void removeAlbum();
     void print();
     void printAlbum();
+    void printSortedAlbums();
+    void printSortedAlbumsTime();
     void play();
 
 public:

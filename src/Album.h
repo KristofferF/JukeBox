@@ -28,6 +28,7 @@ public:
     vector<Song> getSongs() const;
     void addSong(Song song);
     void printAll() const;
+    bool operator<(const Album &album) const;
 };
 
 ostream &operator<<(ostream &os, const Album &person);
