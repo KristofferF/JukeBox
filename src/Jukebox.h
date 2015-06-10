@@ -31,6 +31,7 @@ private:
     void addAlbum(Album album);
     void removeAlbum();
     void print();
+    void printAlbum();
     void play();
 
 public:

@@ -99,9 +99,6 @@ void Jukebox::open(){
         tmpAlbum = Album();
     }
     inFile.close();
-    for (auto album : albums){
-        cout << album;
-    }
 }
 
 void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
@@ -117,7 +114,7 @@ void Jukebox::save(){
     fstream outFile("test.txt", ios::out);
 
     for (auto& album : albums){
-        cout << album;
+        outFile << album;
     }
     outFile.close();
 }
@@ -137,25 +134,48 @@ void Jukebox::print(){
         printMenu.printMenuItems();
         switch(printMenu.getMenuChoices()){
             case 1:
-                cout << "1";
+                cout << "Print one album";
+
                 break;
             case 2:
-                cout << "2";
+                cout << "Print all sorted by album name";
                 break;
             case 3:
-                cout << "3";
+                cout << "Print all sorted by album total time";
                 break;
             case 4:
-                cout << "4";
+                cout << "Print simple sorted by album name";
                 break;
             case 5:
-                cout << "5";
+                cout << "Print simple sorted by album total time";
                 break;
             case 6:
                 again = false;
                 break;
         }
     }while(again);
+}
+
+//------------------------------------------------------------------------------
+// getInput
+// Låter användaren mata in sökt album.
+//------------------------------------------------------------------------------
+void Jukebox::printAlbum() {
+    cout << "Enter album name to look for: ";
+    string searchName;
+    cin >> searchName;
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore(256, '\n');
+        cout << "Failed to read your input. Try again: ";
+        cin >> searchName;
+    }
+
+    for (const auto& album : albums){
+        if (album.get)
+        cout << album;
+
+    }
 }
 
 void Jukebox::play(){
