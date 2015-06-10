@@ -20,6 +20,7 @@ public:
     void printMenuItems();
     size_t getMenuChoices();
     void setLabel(string label);
+    void setAvailableOptions(bool enabled);
 };
 
 #endif //JUKEBOX_MENU_H

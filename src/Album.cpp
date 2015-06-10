@@ -49,7 +49,7 @@ void Album::printAll() const{
 //------------------------------------------------------------------------------
 ostream &operator<<(ostream &os, const Album &album) {
     os  << album.getTitle() << endl << album.getSize() << endl;
-    for (auto song : album.getSongs()) {
+    for (auto& song : album.getSongs()) {
         os << song;
     }
     return os;

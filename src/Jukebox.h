@@ -26,6 +26,7 @@ private:
 
     void file();
     void open();
+    void setAvailableOptions(bool enabled);
     void save();
     void addAlbum(Album album);
     void removeAlbum();

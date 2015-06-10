@@ -23,7 +23,7 @@ Jukebox::Jukebox(){
 
     fileMenu.setLabel("FILE");
     fileMenu.addItem("Open", true);
-    fileMenu.addItem("Save", true);
+    fileMenu.addItem("Save", false);
     fileMenu.addItem("Back to main menu", true);
 
     printMenu.setLabel("PRINT");
@@ -90,22 +90,40 @@ void Jukebox::file(){
 }
 
 void Jukebox::open(){
+    setAvailableOptions(true);
     albums.clear();
     fstream inFile(fileName, ios::in);
     Album tmpAlbum;
-    inFile >> tmpAlbum;
-    addAlbum(tmpAlbum);
+    while(inFile >> tmpAlbum){
+        addAlbum(tmpAlbum);
+        tmpAlbum = Album();
+    }
     inFile.close();
-    cout << tmpAlbum;
+    for (auto album : albums){
+        cout << album;
+    }
+}
+
+void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
+    mainMenu.setAvailableOptions(enabled);
+    fileMenu.setAvailableOptions(enabled);
+    playMenu.setAvailableOptions(enabled);
+    printMenu.setAvailableOptions(enabled);
+
 }
 
 void Jukebox::save(){
-    fstream outFile(fileName, ios::out);
-    outFile << "Hey" << endl;
+    cout << "save" << endl;
+    fstream outFile("test.txt", ios::out);
+
+    for (auto& album : albums){
+        cout << album;
+    }
     outFile.close();
 }
 
 void Jukebox::addAlbum(Album album){
+    albums.push_back(album);
     cout << "add album" << endl;
 }
 

@@ -20,7 +20,7 @@ void Menu::addItem(string menuText, bool enabled){
 void Menu::printMenuItems(){
     cout << LABEL_PREFIX << label << LABEL_SUFFIX << endl;
     selectableMenuItems.clear();
-    for (auto item: menuItems){
+    for (auto& item: menuItems){
         if (item.getEnabled()){
             selectableMenuItems.push_back(item);
             cout << selectableMenuItems.size() << ". " << item.getMenuText() << endl;
@@ -39,7 +39,7 @@ size_t Menu::getMenuChoices(){
         cin >> selection;
     }
     size_t i = 0;
-    for (auto item: menuItems){
+    for (auto& item: menuItems){
         i++;
         if (item.getMenuText() == selectableMenuItems[selection-1].getMenuText()){
             return i;
@@ -49,4 +49,10 @@ size_t Menu::getMenuChoices(){
 
 void Menu::setLabel(string label) {
     this->label = label;
+}
+
+void Menu::setAvailableOptions(bool enabled){
+    for (auto& item : menuItems){
+        item.setEnabled(enabled);
+    }
 }
