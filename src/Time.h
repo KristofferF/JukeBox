@@ -11,6 +11,9 @@
 using namespace std;
 #include <iostream>
 
+const int SEC_PER_HOUR = 3600;
+const int SEC_PER_MIN = 60;
+
 class Time{
 private:
     int hours;
@@ -24,7 +27,7 @@ public:
     bool operator==(const Time &time) const;
     bool operator<(const Time &time) const;
     Time operator+(const Time &time) const;
-
+    string getPrintableTime() const;
 };
 
 ostream &operator<<(ostream &os, const Time &time);

@@ -29,6 +29,11 @@ public:
     void addSong(Song song);
     void printAll() const;
     bool operator<(const Album &album) const;
+    void sortByName();
+    void sortByTime();
+    int getLengthOfAlbum();
+
+    string getPrintableTime();
 };
 
 ostream &operator<<(ostream &os, const Album &person);

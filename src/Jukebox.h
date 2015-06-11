@@ -32,14 +32,13 @@ private:
     void removeAlbum();
     void print();
     void printAlbum();
-    void printSortedAlbums();
-    void printSortedAlbumsTime();
+    void printSortedAlbums(int choice);
+//    void printSortedAlbumsTime();
     void play();
 
 public:
     Jukebox();
     void run();
-
 };
 
 #endif /* SRC_JUKEBOX_H_ */

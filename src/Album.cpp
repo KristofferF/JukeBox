@@ -10,6 +10,9 @@
 #include <iomanip>
 #include <stdlib.h>
 
+//const string sortTime = "sortTime";
+//const string sortName = "sortName";
+
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
@@ -48,6 +51,39 @@ bool Album::operator<(const Album &album) const{
         return true;
     }
     return false;
+}
+
+int Album::getLengthOfAlbum(){
+    Time time;
+    for (auto& song : songs) {
+        time = time + *(song.getTime());
+    }
+    return time.getTime();
+}
+
+string Album::getPrintableTime(){
+    int seconds = getLengthOfAlbum();
+    int hours = seconds/SEC_PER_HOUR;
+    seconds = seconds%SEC_PER_HOUR;
+    int minutes = seconds/SEC_PER_MIN;
+    seconds = seconds%SEC_PER_MIN;
+    string time = "";
+    if (hours > 0){
+        time += hours + ":";
+    }
+    if (minutes > 0){
+        time += minutes + ":";
+    }
+    time += seconds;
+    return time;
+}
+
+void Album::sortByName(){
+
+}
+
+void Album::sortByTime(){
+
 }
 
 //------------------------------------------------------------------------------

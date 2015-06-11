@@ -8,9 +8,6 @@
 #include "Time.h"
 #include <stdlib.h>
 
-const int SEC_PER_HOUR = 3600;
-const int SEC_PER_MIN = 60;
-
 Time::Time(){
     hours = 0;
     minutes = 0;
@@ -19,6 +16,18 @@ Time::Time(){
 
 int Time::getTime() const{
     return seconds+(minutes*SEC_PER_MIN)+(hours*SEC_PER_HOUR);
+}
+
+string Time::getPrintableTime() const{
+    string time = "";
+    if (hours > 0){
+        time += hours + ":";
+    }
+    if (minutes > 0){
+        time += minutes + ":";
+    }
+    time += seconds;
+    return time;
 }
 
 void Time::setTime(int seconds){

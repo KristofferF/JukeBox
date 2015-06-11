@@ -30,7 +30,7 @@ public:
     Time* getTime() const;
     void setTitle(string title);
     void setArtist(string artist);
-
+    string getPrintableTime() const;
 };
 
 ostream &operator<<(ostream &os, const Song &song);

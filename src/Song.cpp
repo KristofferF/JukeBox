@@ -22,6 +22,10 @@ string Song::getArtist() const{
     return artist;
 }
 
+string Song::getPrintableTime() const{
+    return length->getPrintableTime();
+}
+
 Time* Song::getTime() const{
     return length;
 }
