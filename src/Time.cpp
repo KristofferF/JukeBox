@@ -21,12 +21,12 @@ int Time::getTime() const{
 string Time::getPrintableTime() const{
     string time = "";
     if (hours > 0){
-        time += hours + ":";
+        time += to_string(hours) + ":";
     }
     if (minutes > 0){
-        time += minutes + ":";
+        time += to_string(minutes) + ":";
     }
-    time += seconds;
+    time += to_string(seconds);
     return time;
 }
 
@@ -85,6 +85,6 @@ istream &operator>>(istream &is, Time &time) {
     string tmpLength;
     getline(is, tmpLength, '\r');
     is.ignore();
-    time.setTime(atoi(tmpLength.c_str()));
+    time.setTime(stoi(tmpLength));
     return is;
 }

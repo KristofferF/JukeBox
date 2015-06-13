@@ -69,12 +69,12 @@ string Album::getPrintableTime(){
     seconds = seconds%SEC_PER_MIN;
     string time = "";
     if (hours > 0){
-        time += hours + ":";
+        time += to_string(hours) + ":";
     }
     if (minutes > 0){
-        time += minutes + ":";
+        time += to_string(minutes) + ":";
     }
-    time += seconds;
+    time += to_string(seconds);
     return time;
 }
 
