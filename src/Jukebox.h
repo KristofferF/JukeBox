@@ -33,9 +33,10 @@ private:
     void print();
     void printAlbum();
     void printSortedAlbums(int choice);
+    bool compareStrings(const string& a, const string& b);
+
 //    void printSortedAlbumsTime();
     void play();
-
 public:
     Jukebox();
     void run();

@@ -119,6 +119,18 @@ void Jukebox::save(){
 }
 
 void Jukebox::addAlbum(Album album){
+    cout << "Enter album name: ";
+    string title;
+    cin.ignore();
+    getline(cin, title);
+    string songTitle;
+    string songArtist;
+    string songLength;
+    cout << "Enter a song" << endl << Enter title of a song
+    cin >> songTitle;
+    if(!found){
+        cout << "Couldn´t find album. Maybee you misspelled." << endl;
+    }
     albums.push_back(album);
     cout << "add album" << endl;
 }
@@ -133,23 +145,23 @@ void Jukebox::print(){
         printMenu.printMenuItems();
         switch(printMenu.getMenuChoices()){
             case 1:
-                cout << "Print one album";
+                cout << "Printing content of searched album" << endl;
                 printAlbum();
                 break;
             case 2:
-                cout << "Print all sorted by album name" << endl;
+                cout << "Printing all albums sorted by album name" << endl;
                 printSortedAlbums(1);
                 break;
             case 3:
-                cout << "Print all sorted by album total time";
+                cout << "Printing all albums sorted by album total time" << endl;
                 printSortedAlbums(2);
                 break;
             case 4:
-                cout << "Print simple sorted by album name";
+                cout << "Printing all albumnames sorted by album name" << endl;
                 printSortedAlbums(3);
                 break;
             case 5:
-                cout << "Print simple sorted by album total time";
+                cout << "Printing all albumnames sorted by album total time" << endl;
                 printSortedAlbums(4);
                 break;
             case 6:
@@ -171,7 +183,8 @@ void Jukebox::printAlbum() {
     getline(cin, searchName);
     cout << searchName << endl;
     for (auto& album : albums){
-        if (album.getTitle() == searchName){
+        if (compareStrings(album.getTitle(), searchName)){
+            found = true;
             cout << album.getTitle() << endl;
             for (auto song : album.getSongs()){
                 cout << song.getTitle() << "-" << song.getArtist() << " " << song.getPrintableTime() << endl;
@@ -181,6 +194,20 @@ void Jukebox::printAlbum() {
     if(!found){
         cout << "Couldn´t find album. Maybee you misspelled." << endl;
     }
+}
+
+//------------------------------------------------------------------------------
+// compareStrings
+//
+//------------------------------------------------------------------------------
+bool Jukebox::compareStrings(const string& a, const string& b){
+    if (a.size() != b.size()) {
+        return false;
+    }
+    for (size_t i = 0; i < a.size(); ++i)
+        if (tolower(a[i]) != tolower(b[i]))
+            return false;
+    return true;
 }
 
 bool sortByTime(Album a1, Album a2) {
