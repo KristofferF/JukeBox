@@ -111,7 +111,7 @@ istream &operator>>(istream &is, Album &album) {
     string tmpSize;
 
     getline(is, tmpSize, '\r');
-    is.ignore(); // TODO can it bee \r\n instead? same in time class
+    is.ignore(); // TODO can it be \r\n instead? same in time class
     // TODO stoi instead
     int size = atoi(tmpSize.c_str());
 

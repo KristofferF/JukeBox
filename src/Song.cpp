@@ -14,6 +14,13 @@ Song::Song(){
     length = new Time();
 }
 
+Song::Song(string title, string artist, int time){
+    this->title = title;
+    this->artist = artist;
+    length = new Time();
+    length->setTime(time);
+}
+
 string Song::getTitle() const{
     return title;
 }

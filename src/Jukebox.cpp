@@ -6,6 +6,7 @@
  */
 
 #include "Jukebox.h"
+#include "Song.h"
 #include <algorithm>
 #include <fstream>
 
@@ -52,7 +53,7 @@ void Jukebox::run(){
                 file();
                 break;
             case 2:
-                //addAlbum();
+                addAlbum();
                 break;
             case 3:
                 removeAlbum();
@@ -95,7 +96,7 @@ void Jukebox::open(){
     fstream inFile(fileName, ios::in);
     Album tmpAlbum;
     while(inFile >> tmpAlbum){
-        addAlbum(tmpAlbum);
+        albums.push_back(tmpAlbum);
         tmpAlbum = Album();
     }
     inFile.close();
@@ -118,7 +119,7 @@ void Jukebox::save(){
     outFile.close();
 }
 
-void Jukebox::addAlbum(Album album){
+void Jukebox::addAlbum(){
     cout << "Enter album name: ";
     string title;
     cin.ignore();
@@ -126,13 +127,20 @@ void Jukebox::addAlbum(Album album){
     string songTitle;
     string songArtist;
     string songLength;
-    cout << "Enter a song" << endl << Enter title of a song
-    cin >> songTitle;
-    if(!found){
-        cout << "Couldn´t find album. Maybee you misspelled." << endl;
-    }
-    albums.push_back(album);
-    cout << "add album" << endl;
+    cout << "Enter a song" << endl << "Enter title of the song: ";
+    getline(cin, songTitle);
+    cout << "Enter artist of the song: ";
+    getline(cin, songArtist);
+    cout << "Enter length of the song in seconds: ";
+    getline(cin, songLength);
+    int time = stoi(songLength);
+    cout << songTitle << " " << songArtist << " " << songLength << endl;
+
+//    if(!found){
+//        cout << "Couldn´t find album. Maybee you misspelled." << endl;
+//    }
+    //albums.push_back(album);
+    //cout << "add album" << endl;
 }
 
 void Jukebox::removeAlbum(){

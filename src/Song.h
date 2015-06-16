@@ -20,6 +20,7 @@ private:
 
 public:
     Song();
+    Song(string title, string artist, int time);
     // TODO destructor and smartpointer for time
 
 
