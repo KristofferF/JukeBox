@@ -22,15 +22,13 @@ private:
 
 public:
     Album();
+    Album(string title, vector<Song> songs);
     void setTitle(string title);
     string getTitle() const;
     size_t getSize() const;
     vector<Song> getSongs() const;
     void addSong(Song song);
-    void printAll() const;
     bool operator<(const Album &album) const;
-    void sortByName();
-    void sortByTime();
     int getLengthOfAlbum();
 
     string getPrintableTime();

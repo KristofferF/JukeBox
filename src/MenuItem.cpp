@@ -16,7 +16,7 @@ MenuItem::MenuItem(){
 }
 
 //------------------------------------------------------------------------------
-// Förvald konstruktor (Default constructor)
+// Förvald konstruktor (Default constructor) // TODO inte f�rvald va
 //------------------------------------------------------------------------------
 MenuItem::MenuItem(string menuText, bool enabled){
     this->menuText = menuText;
@@ -24,7 +24,7 @@ MenuItem::MenuItem(string menuText, bool enabled){
 }
 
 //------------------------------------------------------------------------------
-// setText
+// setMenuText
 // Datamedlemmen text ges värdet av parametern menuText
 //------------------------------------------------------------------------------
 void MenuItem::setMenuText(string menuText){
@@ -32,7 +32,7 @@ void MenuItem::setMenuText(string menuText){
 }
 
 //------------------------------------------------------------------------------
-// getText
+// getMenuText
 // Returnerar datamedlemmen menuText
 //------------------------------------------------------------------------------
 string MenuItem::getMenuText() const{

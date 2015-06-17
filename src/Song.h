@@ -16,7 +16,7 @@ class Song{
 private:
     string title;
     string artist;
-    Time *length;
+    Time *length; // TODO ska det vara pekare?
 
 public:
     Song();

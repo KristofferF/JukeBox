@@ -20,39 +20,55 @@ Album::Album() {
 
 }
 
+Album::Album(string title, vector<Song> songs) {
+	this->title = title;
+	this->songs = songs;
+}
+
+//------------------------------------------------------------------------------
+// setTitle
+// Datamedlemmen title ges vÃ¤rdet av parametern title
+//------------------------------------------------------------------------------
 void Album::setTitle(string title){
     this->title = title;
 }
 
-void Album::addSong(Song song){
-    songs.push_back(song);
-}
-
+//------------------------------------------------------------------------------
+// getTitle
+// returnerar datamedlemmen title
+//------------------------------------------------------------------------------
 string Album::getTitle() const{
     return title;
 }
 
+//------------------------------------------------------------------------------
+// addSong
+// Lägger till objektet song till albumet
+//------------------------------------------------------------------------------
+void Album::addSong(Song song){
+    songs.push_back(song);
+}
+
+//------------------------------------------------------------------------------
+// getSize
+// returnerar storleken av datamedlemmen <vector> songs
+//------------------------------------------------------------------------------
 size_t Album::getSize() const{
     return songs.size();
 }
 
+//------------------------------------------------------------------------------
+// getSongs
+// returnerar datamedlemmen <vector> songs
+//------------------------------------------------------------------------------
 vector<Song> Album::getSongs() const{
     return songs;
 }
 
-void Album::printAll() const{
-    for (auto song : songs) {
-        cout << song;
-    }
-}
-
-bool Album::operator<(const Album &album) const{
-    if (getTitle() < album.getTitle()) {
-        return true;
-    }
-    return false;
-}
-
+//------------------------------------------------------------------------------
+// getLengthOfAlbum
+// returnerar totala tiden för alla låtarna i albumet
+//------------------------------------------------------------------------------
 int Album::getLengthOfAlbum(){
     Time time;
     for (auto& song : songs) {
@@ -61,6 +77,10 @@ int Album::getLengthOfAlbum(){
     return time.getTime();
 }
 
+//------------------------------------------------------------------------------
+// getLengthOfAlbum
+// returnerar totala tiden för alla låtarna i albumet som en utskriftsvänlig string
+//------------------------------------------------------------------------------
 string Album::getPrintableTime(){
     int seconds = getLengthOfAlbum();
     int hours = seconds/SEC_PER_HOUR;
@@ -78,17 +98,19 @@ string Album::getPrintableTime(){
     return time;
 }
 
-void Album::sortByName(){
 
-}
-
-void Album::sortByTime(){
-
+//------------------------------------------------------------------------------
+// overloaded < operator
+//------------------------------------------------------------------------------
+bool Album::operator<(const Album &album) const{
+    if (getTitle() < album.getTitle()) {
+        return true;
+    }
+    return false;
 }
 
 //------------------------------------------------------------------------------
 // overloaded << operator
-//
 //------------------------------------------------------------------------------
 ostream &operator<<(ostream &os, const Album &album) {
     os  << album.getTitle() << endl << album.getSize() << endl;
@@ -100,7 +122,6 @@ ostream &operator<<(ostream &os, const Album &album) {
 
 //------------------------------------------------------------------------------
 // overloaded >> operator
-//
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Album &album) {
     string title;

@@ -8,16 +8,27 @@
 #include "Time.h"
 #include <stdlib.h>
 
+//------------------------------------------------------------------------------
+// FÃ¶rvald konstruktor (Default constructor)
+//------------------------------------------------------------------------------
 Time::Time(){
     hours = 0;
     minutes = 0;
     seconds = 0;
 }
 
+//------------------------------------------------------------------------------
+// getTime
+// Returnerar obejektets tid i sekunder
+//------------------------------------------------------------------------------
 int Time::getTime() const{
     return seconds+(minutes*SEC_PER_MIN)+(hours*SEC_PER_HOUR);
 }
 
+//------------------------------------------------------------------------------
+// getPrintableTime
+// Returnerar objektets tid som en utskriftsvänlig string
+//------------------------------------------------------------------------------
 string Time::getPrintableTime() const{
     string time = "";
     if (hours > 0){
@@ -30,6 +41,10 @@ string Time::getPrintableTime() const{
     return time;
 }
 
+//------------------------------------------------------------------------------
+// setTitle
+// Datamedlemmen seconds, minutes och hour ges respektive värde av parametern seconds
+//------------------------------------------------------------------------------
 void Time::setTime(int seconds){
     hours = seconds/SEC_PER_HOUR;
     seconds = seconds%SEC_PER_HOUR;

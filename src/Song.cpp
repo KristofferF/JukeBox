@@ -10,6 +10,9 @@
 
 const char DELIM = '|';
 
+//------------------------------------------------------------------------------
+// FÃ¶rvald konstruktor (Default constructor)
+//------------------------------------------------------------------------------
 Song::Song(){
     length = new Time();
 }
@@ -21,31 +24,57 @@ Song::Song(string title, string artist, int time){
     length->setTime(time);
 }
 
+//------------------------------------------------------------------------------
+// getTitle
+// Returnerar datamedlemmen title
+//------------------------------------------------------------------------------
 string Song::getTitle() const{
     return title;
 }
 
+//------------------------------------------------------------------------------
+// getArtist
+// Returnerar datamedlemmen artist
+//------------------------------------------------------------------------------
 string Song::getArtist() const{
     return artist;
 }
 
+//------------------------------------------------------------------------------
+// getPrintableTime
+// Returnerar tiden för en låt som en utskriftsvänlig string
+//------------------------------------------------------------------------------
 string Song::getPrintableTime() const{
     return length->getPrintableTime();
 }
 
+//------------------------------------------------------------------------------
+// getTime
+// Returnerar datamedlemmen length
+//------------------------------------------------------------------------------
 Time* Song::getTime() const{
     return length;
 }
 
+//------------------------------------------------------------------------------
+// setTitle
+// Datamedlemmen title ges vÃ¤rdet av parametern title
+//------------------------------------------------------------------------------
 void Song::setTitle(string title){
     this->title = title;
 }
 
+//------------------------------------------------------------------------------
+// setArtist
+// Datamedlemmen artist ges vÃ¤rdet av parametern artist
+//------------------------------------------------------------------------------
 void Song::setArtist(string artist){
     this->artist = artist;
 }
 
-
+//------------------------------------------------------------------------------
+// overloaded << operator
+//------------------------------------------------------------------------------
 ostream &operator<<(ostream &os, const Song &song){
     os << song.getTitle() << DELIM << song.getArtist() << DELIM << (*song.getTime()) << endl;
     return os;
@@ -53,7 +82,6 @@ ostream &operator<<(ostream &os, const Song &song){
 
 //------------------------------------------------------------------------------
 // overloaded >> operator
-//
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Song &song) {
     string tmpTitle;

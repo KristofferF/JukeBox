@@ -13,10 +13,19 @@ Menu::Menu() {
     // TODO maybee add something here
 }
 
+
+//------------------------------------------------------------------------------
+// addItem
+// Lägger till objekt till menyn
+//------------------------------------------------------------------------------
 void Menu::addItem(string menuText, bool enabled){
     menuItems.push_back(MenuItem(menuText, enabled));
 }
 
+//------------------------------------------------------------------------------
+// printMenuItems
+// Skriver ut menyalternativen
+//------------------------------------------------------------------------------
 void Menu::printMenuItems(){
     cout << LABEL_PREFIX << label << LABEL_SUFFIX << endl;
     selectableMenuItems.clear();
@@ -28,6 +37,10 @@ void Menu::printMenuItems(){
     }
 }
 
+//------------------------------------------------------------------------------
+// getMenuChoices
+// Låter användaren välja ett menyalternativ
+//------------------------------------------------------------------------------
 size_t Menu::getMenuChoices(){
     size_t selection = 0;
     cout << "My choice: ";
@@ -47,10 +60,18 @@ size_t Menu::getMenuChoices(){
     }
 }
 
+//------------------------------------------------------------------------------
+// setLabel
+// Datamedlemmen label ges vÃ¤rdet av parametern label
+//------------------------------------------------------------------------------
 void Menu::setLabel(string label) {
     this->label = label;
 }
 
+//------------------------------------------------------------------------------
+// setAvailableOptions
+// Synligheten på samtliga menyalternativ ges värdet av parametern enabled
+//------------------------------------------------------------------------------
 void Menu::setAvailableOptions(bool enabled){
     for (auto& item : menuItems){
         item.setEnabled(enabled);
