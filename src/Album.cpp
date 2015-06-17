@@ -43,7 +43,7 @@ string Album::getTitle() const{
 
 //------------------------------------------------------------------------------
 // addSong
-// Lägger till objektet song till albumet
+// Lï¿½gger till objektet song till albumet
 //------------------------------------------------------------------------------
 void Album::addSong(Song song){
     songs.push_back(song);
@@ -67,7 +67,7 @@ vector<Song> Album::getSongs() const{
 
 //------------------------------------------------------------------------------
 // getLengthOfAlbum
-// returnerar totala tiden för alla låtarna i albumet
+// returnerar totala tiden fï¿½r alla lï¿½tarna i albumet
 //------------------------------------------------------------------------------
 int Album::getLengthOfAlbum(){
     Time time;
@@ -79,7 +79,7 @@ int Album::getLengthOfAlbum(){
 
 //------------------------------------------------------------------------------
 // getLengthOfAlbum
-// returnerar totala tiden för alla låtarna i albumet som en utskriftsvänlig string
+// returnerar totala tiden fï¿½r alla lï¿½tarna i albumet som en utskriftsvï¿½nlig string
 //------------------------------------------------------------------------------
 string Album::getPrintableTime(){
     int seconds = getLengthOfAlbum();
@@ -125,14 +125,14 @@ ostream &operator<<(ostream &os, const Album &album) {
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Album &album) {
     string title;
-    getline(is, title, '\r');
-    is.ignore();
+    getline(is, title);
+    //is.ignore();
     album.setTitle(title);
 
     string tmpSize;
 
-    getline(is, tmpSize, '\r');
-    is.ignore(); // TODO can it be \r\n instead? same in time class
+    getline(is, tmpSize);
+    //is.ignore(); // TODO can it be \r\n instead? same in time class
     // TODO stoi instead
     int size = atoi(tmpSize.c_str());
 

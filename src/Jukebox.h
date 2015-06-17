@@ -13,11 +13,13 @@
 #include <vector>
 #include "Album.h"
 #include "Menu.h"
+#include "Queue.h"
 using namespace std;
 
 class Jukebox{
 private:
     vector<Album> albums;
+    Queue queue;
     Menu mainMenu;
     Menu fileMenu;
     Menu printMenu;

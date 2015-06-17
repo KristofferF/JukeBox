@@ -32,6 +32,7 @@ public:
     void setTitle(string title);
     void setArtist(string artist);
     string getPrintableTime() const;
+    bool operator==(const Song &song) const;
 };
 
 ostream &operator<<(ostream &os, const Song &song);

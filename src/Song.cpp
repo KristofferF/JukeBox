@@ -42,7 +42,7 @@ string Song::getArtist() const{
 
 //------------------------------------------------------------------------------
 // getPrintableTime
-// Returnerar tiden för en låt som en utskriftsvänlig string
+// Returnerar tiden fï¿½r en lï¿½t som en utskriftsvï¿½nlig string
 //------------------------------------------------------------------------------
 string Song::getPrintableTime() const{
     return length->getPrintableTime();
@@ -70,6 +70,14 @@ void Song::setTitle(string title){
 //------------------------------------------------------------------------------
 void Song::setArtist(string artist){
     this->artist = artist;
+}
+
+//------------------------------------------------------------------------------
+// overloaded == operator
+//
+//------------------------------------------------------------------------------
+bool Song::operator==(const Song &song) const {
+    return title == song.getTitle() && artist == song.getArtist() && length == song.getTime();
 }
 
 //------------------------------------------------------------------------------

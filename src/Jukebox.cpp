@@ -80,7 +80,7 @@ void Jukebox::run(){
 
 //------------------------------------------------------------------------------
 // file
-// Genomför valt filalternativ
+// Genomfï¿½r valt filalternativ
 //------------------------------------------------------------------------------
 void Jukebox::file(){
     bool again = true;
@@ -102,7 +102,7 @@ void Jukebox::file(){
 
 //------------------------------------------------------------------------------
 // open
-// Äppnar en fil och läser in album
+// ï¿½ppnar en fil och lï¿½ser in album
 //------------------------------------------------------------------------------
 void Jukebox::open(){
     setAvailableOptions(true);
@@ -118,7 +118,7 @@ void Jukebox::open(){
 
 //------------------------------------------------------------------------------
 // setAvailableOptions
-// Ändrar så alla alternativ i menyerna blir tillgängliga
+// ï¿½ndrar sï¿½ alla alternativ i menyerna blir tillgï¿½ngliga
 //------------------------------------------------------------------------------
 void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
     mainMenu.setAvailableOptions(enabled);
@@ -130,7 +130,7 @@ void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
 
 //------------------------------------------------------------------------------
 // save
-// Sparar alla albumen på en fil.
+// Sparar alla albumen pï¿½ en fil.
 //------------------------------------------------------------------------------
 void Jukebox::save(){
     cout << "save" << endl;
@@ -143,7 +143,7 @@ void Jukebox::save(){
 
 //------------------------------------------------------------------------------
 // addAlbum
-// Lägger til album
+// Lï¿½gger til album
 //------------------------------------------------------------------------------
 void Jukebox::addAlbum(){
     cout << "Enter album name: ";
@@ -166,7 +166,7 @@ void Jukebox::addAlbum(){
 		cout << "Enter length of the song in seconds: ";
 		getline(cin, songLength);
 		int time = stoi(songLength);
-		Song song(songTitle, songArtist, songLength);
+		Song song(songTitle, songArtist, time);
 		songs.push_back(song);
 		cout << songTitle << " " << songArtist << " " << songLength << endl;
     }
@@ -186,14 +186,13 @@ void Jukebox::removeAlbum(){
 	cin.ignore();
 	getline(cin, searchName);
 	cout << searchName << endl;
-	for(auto i = albums.begin(); i != albums.end(); ++i)
-	{
-	    if(compareStrings(albums[i].getTitle(), searchName)){
-	    	cout << albums[i].getTitle() << "removed!" << endl;
-	    	i = albums.erase(i);
+	for(auto it = begin(albums); it != end(albums); ++it){
+        if(compareStrings((*it).getTitle(), searchName)){
+	    	cout << (*it).getTitle() << "removed!" << endl;
+	    	it = albums.erase(it);
+            found = true;
 	    	break;
 	    }
-
 	}
 	if(!found){ // TODO is it enough with just break above. Then remove if here
 		cout << "CouldnÂ´t find album. Maybee you misspelled." << endl;
@@ -263,7 +262,7 @@ void Jukebox::printAlbum() {
 
 //------------------------------------------------------------------------------
 // compareStrings
-//	Jämför två strings utan att ta hänsyn till versaler och gemener
+//	Jï¿½mfï¿½r tvï¿½ strings utan att ta hï¿½nsyn till versaler och gemener
 //------------------------------------------------------------------------------
 bool Jukebox::compareStrings(const string& a, const string& b){
     if (a.size() != b.size()) {
@@ -277,7 +276,7 @@ bool Jukebox::compareStrings(const string& a, const string& b){
 
 //------------------------------------------------------------------------------
 // sortByTime
-// Jämför två album efter längd
+// Jï¿½mfï¿½r tvï¿½ album efter lï¿½ngd
 //------------------------------------------------------------------------------
 bool sortByTime(Album a1, Album a2) { // TODO skall de vara en del av Jukebox::
     return a1.getLengthOfAlbum() > a2.getLengthOfAlbum();
@@ -285,7 +284,7 @@ bool sortByTime(Album a1, Album a2) { // TODO skall de vara en del av Jukebox::
 
 //------------------------------------------------------------------------------
 // printAll
-// Skriver ut albumen och respektive innehåll
+// Skriver ut albumen och respektive innehï¿½ll
 //------------------------------------------------------------------------------
 void printAll(Album album){ // TODO skall de vara en del av Jukebox::
     cout << album.getTitle() << endl;
@@ -304,7 +303,7 @@ void printSimple(Album album){ // TODO skall de vara en del av Jukebox::
 
 //------------------------------------------------------------------------------
 // printSimpleTime
-// Skriver ut albumnamnen i ordning efter längd
+// Skriver ut albumnamnen i ordning efter lï¿½ngd
 //------------------------------------------------------------------------------
 void printSimpleTime(Album album){ // TODO skall de vara en del av Jukebox::
     cout << album.getTitle() << " " << album.getPrintableTime() << endl;
@@ -346,10 +345,21 @@ void Jukebox::play(){
         playMenu.printMenuItems();
         switch(playMenu.getMenuChoices()){
             case 1:
-                cout << "1";
+                cout << "adding songs to queue" << endl;
+                for(auto song : albums[0].getSongs()){
+                    cout << "1 " << song << endl;
+                    queue.add(song);
+                    cout << 2 << endl;
+                }
                 break;
             case 2:
-                cout << "2";
+                if(!queue.isEmpty()){
+                    cout << queue.remove() << endl;
+                }
+                else{
+                    cout << "No songs left in playlist" << endl;
+                }
+
                 break;
             case 3:
                 cout << "3";

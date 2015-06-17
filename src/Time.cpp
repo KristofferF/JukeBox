@@ -27,7 +27,7 @@ int Time::getTime() const{
 
 //------------------------------------------------------------------------------
 // getPrintableTime
-// Returnerar objektets tid som en utskriftsvänlig string
+// Returnerar objektets tid som en utskriftsvï¿½nlig string
 //------------------------------------------------------------------------------
 string Time::getPrintableTime() const{
     string time = "";
@@ -43,7 +43,7 @@ string Time::getPrintableTime() const{
 
 //------------------------------------------------------------------------------
 // setTitle
-// Datamedlemmen seconds, minutes och hour ges respektive värde av parametern seconds
+// Datamedlemmen seconds, minutes och hour ges respektive vï¿½rde av parametern seconds
 //------------------------------------------------------------------------------
 void Time::setTime(int seconds){
     hours = seconds/SEC_PER_HOUR;
@@ -98,8 +98,8 @@ ostream &operator<<(ostream &os, const Time &time) {
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Time &time) {
     string tmpLength;
-    getline(is, tmpLength, '\r');
-    is.ignore();
+    getline(is, tmpLength);
+    //is.ignore();
     time.setTime(stoi(tmpLength));
     return is;
 }
