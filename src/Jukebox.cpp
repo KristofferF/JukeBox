@@ -11,6 +11,7 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
+#include <sstream>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
@@ -345,11 +346,53 @@ void Jukebox::play(){
         playMenu.printMenuItems();
         switch(playMenu.getMenuChoices()){
             case 1:
-                cout << "adding songs to queue" << endl;
-                for(auto song : albums[0].getSongs()){
-                    cout << "1 " << song << endl;
-                    queue.add(song);
-                    cout << 2 << endl;
+                cout << "Add songs to playlist" << endl;
+                {
+                    size_t i = 0;
+
+                    for (auto album : albums) {
+                        for (auto song : album.getSongs()) {
+                            i++;
+                            cout << i << ": " << song.getTitle() << " - " << song.getArtist() << endl;
+                        }
+                    }
+
+                    cout << "Type number to the songs you wish to add to the playlist.\nExample: 2, 12, 4, 28\nEnter your selection: ";
+                    string selection;
+                    vector<int> selections;
+                    cin.ignore();
+                    getline(cin, selection);
+                    stringstream stream(selection);
+                    string tmpSelection;
+                    bool errors = false;
+                    while (getline(stream, tmpSelection, ',')) {
+                        try {
+                            int selectedNumber = stoi(tmpSelection);
+                            if(selectedNumber <= i && selectedNumber > 0){
+                                selections.push_back(selectedNumber);
+                            }
+                            else{
+                                errors = true;
+                            }
+                        }
+                        catch(...){
+                            errors = true;
+                        }
+                    }
+
+                    if(errors){
+                        cout << "Skipped some entries because they we're invalid" << endl;
+                    }
+
+                    i = 0;
+                    for (auto album : albums) {
+                        for (auto song : album.getSongs()) {
+                            i++;
+                            if(find(selections.begin(), selections.end(), i)){
+                                queue.add(song);
+                            }
+                        }
+                    }
                 }
                 break;
             case 2:
@@ -362,7 +405,6 @@ void Jukebox::play(){
 
                 break;
             case 3:
-                cout << "3";
                 break;
             case 4:
                 again = false;
