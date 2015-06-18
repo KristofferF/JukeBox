@@ -6,6 +6,9 @@
 
 const int startSize = 5;
 
+//------------------------------------------------------------------------------
+// FÃ¶rvald konstruktor (Default constructor)
+//------------------------------------------------------------------------------
 Queue::Queue() {
     songs = new Song[startSize];
     first = 0;
@@ -13,6 +16,10 @@ Queue::Queue() {
     size = startSize;
 }
 
+//------------------------------------------------------------------------------
+// add
+// Lägger till låten som ges som parameter i kön
+//------------------------------------------------------------------------------
 void Queue::add(Song song) {
     if (last + 1 > size){
         resize();
@@ -21,7 +28,10 @@ void Queue::add(Song song) {
     last++;
 }
 
-
+//------------------------------------------------------------------------------
+// remove
+// Tar bort den första låten i kön och returnerar den
+//------------------------------------------------------------------------------
 Song Queue::remove() {
     Song song = songs[first];
     first = (first+1) % size;
@@ -29,12 +39,20 @@ Song Queue::remove() {
     return song;
 }
 
+//------------------------------------------------------------------------------
+// emptyQueue
+// Tömmer kön
+//------------------------------------------------------------------------------
 void Queue::emptyQueue() {
-
+	// TODO implement or remove
 }
 
+//------------------------------------------------------------------------------
+// resize
+// Datamedlemmen text ges vÃ¤rdet av parametern menuText
+//------------------------------------------------------------------------------
 void Queue::resize() {
-    size *= 2;
+    size += 5;
     Song *tmp = new Song[size];
     for (size_t i = 0; i < last; i++){
         tmp[i] = songs[(first + i) % size];
@@ -44,6 +62,10 @@ void Queue::resize() {
     first = 0;
 }
 
+//------------------------------------------------------------------------------
+// setMenuText
+// Datamedlemmen text ges vÃ¤rdet av parametern menuText
+//------------------------------------------------------------------------------
 bool Queue::isEmpty() {
     return last == 0;
 }
