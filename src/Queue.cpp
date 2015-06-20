@@ -18,7 +18,7 @@ Queue::Queue() {
 
 //------------------------------------------------------------------------------
 // add
-// Lägger till låten som ges som parameter i kön
+// Lï¿½gger till lï¿½ten som ges som parameter i kï¿½n
 //------------------------------------------------------------------------------
 void Queue::add(Song song) {
     if (last + 1 > size){
@@ -30,7 +30,7 @@ void Queue::add(Song song) {
 
 //------------------------------------------------------------------------------
 // remove
-// Tar bort den första låten i kön och returnerar den
+// Tar bort den fï¿½rsta lï¿½ten i kï¿½n och returnerar den
 //------------------------------------------------------------------------------
 Song Queue::remove() {
     Song song = songs[first];
@@ -41,10 +41,14 @@ Song Queue::remove() {
 
 //------------------------------------------------------------------------------
 // emptyQueue
-// Tömmer kön
+// Tï¿½mmer kï¿½n
 //------------------------------------------------------------------------------
 void Queue::emptyQueue() {
-	// TODO implement or remove
+    delete []songs;
+    songs = new Song[startSize];
+    first = 0;
+    last = 0;
+    size = startSize;
 }
 
 //------------------------------------------------------------------------------

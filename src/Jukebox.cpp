@@ -12,8 +12,7 @@
 #include <string>
 #include <stdlib.h>
 #include <sstream>
-
-const int MAX_NUMBER_OF_SONGS = 100;
+#include <unistd.h>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
@@ -47,6 +46,8 @@ Jukebox::Jukebox(){
     playMenu.addItem("Back to main menu", true);
 
     fileName = "jukebox.txt";
+
+    generator = default_random_engine(static_cast<unsigned>(time(0)));
 }
 
 //------------------------------------------------------------------------------
@@ -167,15 +168,24 @@ void Jukebox::addAlbum(){
 		cout << "Enter artist of the song: ";
 		getline(cin, songArtist);
 		cout << "Enter length of the song in seconds: ";
-		getline(cin, songLength);
-		int time = stoi(songLength);
+		bool catchError = true;
+		int time = 0;
+		while(catchError){
+            getline(cin, songLength);
+            try {
+                time = stoi(songLength);
+                catchError = false;
+            } catch (...) {
+                cout << "Incorrect entry. You must enter a number: ";
+            }
+		}
 		Song song(songTitle, songArtist, time);
 		songs.push_back(song);
 		cout << songTitle << " " << songArtist << " " << songLength << endl;
     }
     Album album(title, songs);
     albums.push_back(album);
-    cout << "Album " << title <<  "added!" << endl;
+    cout << "Album " << title <<  " added!" << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -290,7 +300,7 @@ bool sortByTime(Album a1, Album a2) { // TODO skall de vara en del av Jukebox::
 // Skriver ut albumen och respektive inneh�ll
 //------------------------------------------------------------------------------
 void printAll(Album album){ // TODO skall de vara en del av Jukebox::
-    cout << album.getTitle() << endl;
+    cout << "Album: " << album.getTitle() << endl << "Songs: " << endl;
     for (auto song : album.getSongs()){
         cout << song.getTitle() << "-" << song.getArtist() << " " << song.getPrintableTime() << endl;
     }
@@ -366,6 +376,7 @@ void Jukebox::play(){
 
 
 void Jukebox::createPlaylist(int choice) {
+    queue.emptyQueue();
     cout << "Add songs to playlist" << endl;
     {
         size_t i = 0;
@@ -373,27 +384,27 @@ void Jukebox::createPlaylist(int choice) {
         for (auto album : albums) {
             for (auto song : album.getSongs()) {
                 i++;
-                cout << i << ": " << song.getTitle() << " - "
-                        << song.getArtist() << endl;
+                if (choice == 1){
+                    cout << i << ": " << song.getTitle() << " - " << song.getArtist() << endl;
+                }
+
                 songs.push_back(song);
             }
         }
         vector<int> selectionArray;
         if (choice == 1){
-            selectedSongsForPlaylist(i, selectionArray);
+            selectSongsForPlaylist(i, selectionArray);
         }
         else if (choice == 2){
             randomSongsForPlaylist(i, selectionArray);
         }
-
-        i = 0;
         for (auto songNumber : selectionArray) {
             queue.add(songs[songNumber - 1]);
         }
     }
 }
 
-void Jukebox::selectedSongsForPlaylist(int size, vector<int>& selectionArray) {
+void Jukebox::selectSongsForPlaylist(int size, vector<int>& selectionArray) {
     cout << "Type number to the songs you wish to add to the playlist.\n"
             "Example: 2, 12, 4, 28\nEnter your selection: ";
     string selection;
@@ -420,32 +431,46 @@ void Jukebox::selectedSongsForPlaylist(int size, vector<int>& selectionArray) {
 }
 
 void Jukebox::randomSongsForPlaylist(int size, vector<int>& selectionArray) {
-    cout << "How many songs do you wish to be in the playlist?\nChoose a number between 0 and " <<
-            MAX_NUMBER_OF_SONGS << ": ";
+    cout << "How many songs do you wish to be in the playlist?\nChoose a number between 1 and " <<
+            size << ": ";
     string selection;
     bool go = true;
+    int selectionAsInt = 0;
     while(go){
         cin.ignore();
         getline(cin, selection);
         try {
-            int selectedNumber = stoi(selection);
-            if (selectedNumber <= MAX_NUMBER_OF_SONGS && selectedNumber > 0) {
+            selectionAsInt = stoi(selection);
+            if (selectionAsInt <= size && selectionAsInt > 0) {
                 go = false;
             } else {
-                cout << "Choose a number between 0 and " << MAX_NUMBER_OF_SONGS << ": ";
+                cout << "Choose a number between 1 and " << size << ": ";
             }
         } catch (...) {
-            cout << "Choose a number between 0 and " << MAX_NUMBER_OF_SONGS << ": ";
+            cout << "Choose a number between 1 and " << size << ": ";
         }
     }
-
-
+    uniform_int_distribution<int> random(1, size);
+    for (int i = 0; i < selectionAsInt; i++){
+        int tmp = random(generator);
+        while (find(selectionArray.begin(), selectionArray.end(), tmp) != selectionArray.end()){
+            tmp = random(generator);
+        }
+        selectionArray.push_back(tmp);
+    }
 }
 
 void Jukebox::playList() {
-    if (!queue.isEmpty()) {
-        cout << queue.remove() << endl;
+    Queue tmpQueue = queue;
+    if (!tmpQueue.isEmpty()){
+        cout << "Playing your list of songs!" << endl;
+        while (!tmpQueue.isEmpty()) {
+            Song tmpSong = tmpQueue.remove();
+            cout << tmpSong.getTitle() << " - " << tmpSong.getArtist() << endl;
+            sleep(2);
+        }
+        cout << "All songs played!" << endl << endl;
     } else {
-        cout << "No songs left in playlist" << endl;
+        cout << "No songs in the playlist!" << endl << endl;
     }
 }

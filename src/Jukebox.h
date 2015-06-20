@@ -14,6 +14,7 @@
 #include "Album.h"
 #include "Menu.h"
 #include "Queue.h"
+#include <random>
 using namespace std;
 
 class Jukebox{
@@ -25,6 +26,7 @@ private:
     Menu printMenu;
     Menu playMenu;
     string fileName;
+    default_random_engine generator;
 
     void file();
     void open();
@@ -40,7 +42,7 @@ private:
 //    void printSortedAlbumsTime();
     void play();
     void createPlaylist(int choice);
-    void selectedSongsForPlaylist(int size, vector<int>& selections);
+    void selectSongsForPlaylist(int size, vector<int>& selections);
     void randomSongsForPlaylist(int size, vector<int>& selections);
     void playList();
 
