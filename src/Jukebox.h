@@ -39,6 +39,11 @@ private:
 
 //    void printSortedAlbumsTime();
     void play();
+    void createPlaylist(int choice);
+    void selectedSongsForPlaylist(int size, vector<int>& selections);
+    void randomSongsForPlaylist(int size, vector<int>& selections);
+    void playList();
+
 public:
     Jukebox();
     void run();
