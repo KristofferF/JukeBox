@@ -17,6 +17,26 @@ Queue::Queue() {
 }
 
 //------------------------------------------------------------------------------
+// Kopierings kosntruktor (Copy constructor)
+//------------------------------------------------------------------------------
+Queue::Queue(const Queue& queue) {
+    size = queue.getSize();
+    songs = new Song[size];
+    first = queue.getFirst();
+    last = queue.getLast();
+    for (size_t i = 0; i < last; i++){
+        songs[i] = queue.getSongs()[(first + i) % size];
+    }
+}
+
+//------------------------------------------------------------------------------
+// Destruktor (Destructor)
+//------------------------------------------------------------------------------
+Queue::~Queue() {
+    delete []songs;
+}
+
+//------------------------------------------------------------------------------
 // add
 // L�gger till l�ten som ges som parameter i k�n
 //------------------------------------------------------------------------------
@@ -53,7 +73,7 @@ void Queue::emptyQueue() {
 
 //------------------------------------------------------------------------------
 // resize
-// Datamedlemmen text ges värdet av parametern menuText
+// Ändra stroleken på listan
 //------------------------------------------------------------------------------
 void Queue::resize() {
     size += 5;
@@ -67,9 +87,41 @@ void Queue::resize() {
 }
 
 //------------------------------------------------------------------------------
-// setMenuText
-// Datamedlemmen text ges värdet av parametern menuText
+// isEmpty
+// returnerar true om listan är tom
 //------------------------------------------------------------------------------
 bool Queue::isEmpty() {
     return last == 0;
+}
+
+//------------------------------------------------------------------------------
+// getSize
+// returnerar datamedlemmen size
+//------------------------------------------------------------------------------
+int Queue::getSize() const{
+    return size;
+}
+
+//------------------------------------------------------------------------------
+// getFirst
+// returnerar datamedlemmen first
+//------------------------------------------------------------------------------
+int Queue::getFirst() const{
+    return first;
+}
+
+//------------------------------------------------------------------------------
+// getLast
+// returnerar datamedlemmen last
+//------------------------------------------------------------------------------
+int Queue::getLast() const{
+    return last;
+}
+
+//------------------------------------------------------------------------------
+// getSongs
+// returnerar datamedlemmen songs
+//------------------------------------------------------------------------------
+Song* Queue::getSongs() const{
+    return songs;
 }

@@ -6,10 +6,8 @@
  */
 
 #include "Jukebox.h"
-#include "Song.h"
 #include <algorithm>
 #include <fstream>
-#include <string>
 #include <stdlib.h>
 #include <sstream>
 #include <unistd.h>
@@ -46,6 +44,7 @@ Jukebox::Jukebox(){
     playMenu.addItem("Back to main menu", true);
 
     fileName = "jukebox.txt";
+    fileNameOut = "jukeboxOut.txt";
 
     generator = default_random_engine(static_cast<unsigned>(time(0)));
 }
@@ -113,11 +112,14 @@ void Jukebox::open(){
     albums.clear();
     fstream inFile(fileName, ios::in);
     Album tmpAlbum;
+    int numberOfAlbums = 0;
     while(inFile >> tmpAlbum){
         albums.push_back(tmpAlbum);
         tmpAlbum = Album();
+        numberOfAlbums++;
     }
     inFile.close();
+    cout << numberOfAlbums << " albums loaded from " << fileName  << "!" << endl << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -134,15 +136,15 @@ void Jukebox::setAvailableOptions(bool enabled){ // TODO Maybee no param
 
 //------------------------------------------------------------------------------
 // save
-// Sparar alla albumen p� en fil.
+// Sparar alla albumen till en fil.
 //------------------------------------------------------------------------------
 void Jukebox::save(){
-    cout << "save" << endl;
-    fstream outFile("test.txt", ios::out); // TODO change save location
+    fstream outFile(fileNameOut, ios::out);
     for (auto& album : albums){
         outFile << album;
     }
     outFile.close();
+    cout << albums.size() << " albums saved to " << fileNameOut  << "!" << endl << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -162,7 +164,7 @@ void Jukebox::addAlbum(){
     while(go){
 		cout << "Enter title of the song or enter 0 to stop enter songs: ";
 		getline(cin, songTitle);
-		if(songTitle == "0"){ // TODO test if it works
+		if(songTitle == "0"){ //
 			break;
 		}
 		cout << "Enter artist of the song: ";
@@ -181,11 +183,10 @@ void Jukebox::addAlbum(){
 		}
 		Song song(songTitle, songArtist, time);
 		songs.push_back(song);
-		cout << songTitle << " " << songArtist << " " << songLength << endl;
     }
     Album album(title, songs);
     albums.push_back(album);
-    cout << "Album " << title <<  " added!" << endl;
+    cout << "Album " << title <<  " added!" << endl << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -201,20 +202,20 @@ void Jukebox::removeAlbum(){
 	cout << searchName << endl;
 	for(auto it = begin(albums); it != end(albums); ++it){
         if(compareStrings((*it).getTitle(), searchName)){
-	    	cout << (*it).getTitle() << "removed!" << endl;
+	    	cout << (*it).getTitle() << " removed!" << endl << endl;
 	    	it = albums.erase(it);
             found = true;
 	    	break;
 	    }
 	}
-	if(!found){ // TODO is it enough with just break above. Then remove if here
-		cout << "Couldn´t find album. Maybee you misspelled." << endl;
+	if(!found){
+		cout << "Couldn´t find album " << searchName << ". Maybee you misspelled." << endl << endl;
 	}
 }
 
 //------------------------------------------------------------------------------
 // print
-// Skriver ut valt alternativ
+// Meny för att skriva ut album/låtar
 //------------------------------------------------------------------------------
 void Jukebox::print(){
     bool again = true;
@@ -269,7 +270,7 @@ void Jukebox::printAlbum() {
         }
     }
     if(!found){ // TODO is it enough with just break above. Then remove if here
-        cout << "Couldn´t find album. Maybee you misspelled." << endl;
+        cout << "Couldn´t find album. Maybee you misspelled." << endl << endl;
     }
 }
 
@@ -300,10 +301,11 @@ bool sortByTime(Album a1, Album a2) { // TODO skall de vara en del av Jukebox::
 // Skriver ut albumen och respektive inneh�ll
 //------------------------------------------------------------------------------
 void printAll(Album album){ // TODO skall de vara en del av Jukebox::
-    cout << "Album: " << album.getTitle() << endl << "Songs: " << endl;
+    cout << "Album: " << album.getTitle() << endl;
     for (auto song : album.getSongs()){
         cout << song.getTitle() << "-" << song.getArtist() << " " << song.getPrintableTime() << endl;
     }
+    cout << endl;
 }
 
 //------------------------------------------------------------------------------
@@ -340,10 +342,12 @@ void Jukebox::printSortedAlbums(int choice) {
         case 3:
             sort(sortedAlbums.begin(), sortedAlbums.end());
             for_each (sortedAlbums.begin(), sortedAlbums.end(), printSimple);
+            cout << endl;
             break;
         case 4:
             sort(sortedAlbums.begin(), sortedAlbums.end(), sortByTime);
             for_each (sortedAlbums.begin(), sortedAlbums.end(), printSimpleTime);
+            cout << endl;
             break;
     }
 }
@@ -351,7 +355,7 @@ void Jukebox::printSortedAlbums(int choice) {
 
 //------------------------------------------------------------------------------
 // play
-// Simulerar en uppspelning
+// Meny för att välja och spela upp en spellista
 //------------------------------------------------------------------------------
 void Jukebox::play(){
     bool again = true;
@@ -374,7 +378,10 @@ void Jukebox::play(){
     }while(again);
 }
 
-
+//------------------------------------------------------------------------------
+// selectSongsForPlaylist
+// Väljer låtar till spellistan med hjälp av användaren
+//------------------------------------------------------------------------------
 void Jukebox::createPlaylist(int choice) {
     queue.emptyQueue();
     cout << "Add songs to playlist" << endl;
@@ -401,9 +408,14 @@ void Jukebox::createPlaylist(int choice) {
         for (auto songNumber : selectionArray) {
             queue.add(songs[songNumber - 1]);
         }
+        cout << selectionArray.size() << " songs added to playlist!" << endl << endl;
     }
 }
 
+//------------------------------------------------------------------------------
+// selectSongsForPlaylist
+// Väljer låtar till spellistan med hjälp av användaren
+//------------------------------------------------------------------------------
 void Jukebox::selectSongsForPlaylist(int size, vector<int>& selectionArray) {
     cout << "Type number to the songs you wish to add to the playlist.\n"
             "Example: 2, 12, 4, 28\nEnter your selection: ";
@@ -430,6 +442,10 @@ void Jukebox::selectSongsForPlaylist(int size, vector<int>& selectionArray) {
     }
 }
 
+//------------------------------------------------------------------------------
+// randomSongsForPlaylist
+// Väljer låtar till spellistan slumpmässigt
+//------------------------------------------------------------------------------
 void Jukebox::randomSongsForPlaylist(int size, vector<int>& selectionArray) {
     cout << "How many songs do you wish to be in the playlist?\nChoose a number between 1 and " <<
             size << ": ";
@@ -460,6 +476,10 @@ void Jukebox::randomSongsForPlaylist(int size, vector<int>& selectionArray) {
     }
 }
 
+//------------------------------------------------------------------------------
+// playList
+// Simulerar en uppspelning
+//------------------------------------------------------------------------------
 void Jukebox::playList() {
     Queue tmpQueue = queue;
     if (!tmpQueue.isEmpty()){

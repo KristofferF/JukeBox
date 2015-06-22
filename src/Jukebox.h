@@ -26,6 +26,7 @@ private:
     Menu printMenu;
     Menu playMenu;
     string fileName;
+    string fileNameOut;
     default_random_engine generator;
 
     void file();

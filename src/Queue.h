@@ -15,12 +15,19 @@ private:
 
 public:
     Queue();
+    Queue(const Queue& queue);
+    ~Queue();
     void add(Song song);
     Song remove();
     void emptyQueue();
     void resize();
-
     bool isEmpty();
+    int getSize() const;
+    Song *getSongs() const;
+
+    int getFirst() const;
+
+    int getLast() const;
 };
 
 

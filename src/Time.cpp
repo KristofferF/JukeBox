@@ -6,7 +6,6 @@
  */
 
 #include "Time.h"
-#include <stdlib.h>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
@@ -37,7 +36,12 @@ string Time::getPrintableTime() const{
     if (minutes > 0){
         time += to_string(minutes) + ":";
     }
-    time += to_string(seconds);
+    if(seconds > 9){
+        time += to_string(seconds);
+    }
+    else {
+        time += "0" + to_string(seconds);
+    }
     return time;
 }
 
@@ -99,7 +103,6 @@ ostream &operator<<(ostream &os, const Time &time) {
 istream &operator>>(istream &is, Time &time) {
     string tmpLength;
     getline(is, tmpLength);
-    //is.ignore();
     time.setTime(stoi(tmpLength));
     return is;
 }

@@ -9,14 +9,12 @@ const string LABEL_PREFIX = "**** ";
 const string LABEL_SUFFIX = " ****";
 
 Menu::Menu() {
-
-    // TODO maybee add something here
 }
 
 
 //------------------------------------------------------------------------------
 // addItem
-// Lägger till objekt till menyn
+// Lï¿½gger till objekt till menyn
 //------------------------------------------------------------------------------
 void Menu::addItem(string menuText, bool enabled){
     menuItems.push_back(MenuItem(menuText, enabled));
@@ -39,7 +37,7 @@ void Menu::printMenuItems(){
 
 //------------------------------------------------------------------------------
 // getMenuChoices
-// Låter användaren välja ett menyalternativ
+// Lï¿½ter anvï¿½ndaren vï¿½lja ett menyalternativ
 //------------------------------------------------------------------------------
 size_t Menu::getMenuChoices(){
     size_t selection = 0;
@@ -51,6 +49,7 @@ size_t Menu::getMenuChoices(){
         cout << "You have to enter a valid choice. Please enter your selection again: ";
         cin >> selection;
     }
+    cout << endl;
     size_t i = 0;
     for (auto& item: menuItems){
         i++;
@@ -58,6 +57,7 @@ size_t Menu::getMenuChoices(){
             return i;
         }
     }
+
 }
 
 //------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ void Menu::setLabel(string label) {
 
 //------------------------------------------------------------------------------
 // setAvailableOptions
-// Synligheten på samtliga menyalternativ ges värdet av parametern enabled
+// Synligheten pï¿½ samtliga menyalternativ ges vï¿½rdet av parametern enabled
 //------------------------------------------------------------------------------
 void Menu::setAvailableOptions(bool enabled){
     for (auto& item : menuItems){

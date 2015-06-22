@@ -10,9 +10,6 @@
 #include <iomanip>
 #include <stdlib.h>
 
-//const string sortTime = "sortTime";
-//const string sortName = "sortName";
-
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
@@ -94,6 +91,7 @@ string Album::getPrintableTime(){
     if (minutes > 0){
         time += to_string(minutes) + ":";
     }
+
     time += to_string(seconds);
     return time;
 }
@@ -124,15 +122,17 @@ ostream &operator<<(ostream &os, const Album &album) {
 // overloaded >> operator
 //------------------------------------------------------------------------------
 istream &operator>>(istream &is, Album &album) {
-    string title;
-    getline(is, title);
-    //is.ignore();
+    string tmpTitle;
+    getline(is, tmpTitle);
+    string title = "";
+    for(auto c : tmpTitle) {
+        if (c != '\n' && c != '\r'){
+            title += c;
+        }
+    }
     album.setTitle(title);
-
     string tmpSize;
-
     getline(is, tmpSize);
-    //is.ignore(); // TODO can it be \r\n instead? same in time class
     // TODO stoi instead
     int size = atoi(tmpSize.c_str());
 
@@ -141,6 +141,5 @@ istream &operator>>(istream &is, Album &album) {
         is >> song;
         album.addSong(song);
     }
-
     return is;
 }

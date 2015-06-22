@@ -16,16 +16,12 @@ class Song{
 private:
     string title;
     string artist;
-    Time *length; // TODO ska det vara pekare?
+    Time *length;
 
 public:
     Song();
     Song(string title, string artist, int time);
-    // TODO destructor and smartpointer for time
-
-
-
-
+    ~Song();
     string getTitle() const;
     string getArtist() const;
     Time* getTime() const;

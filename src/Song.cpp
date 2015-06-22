@@ -6,7 +6,6 @@
  */
 
 #include "Song.h"
-#include <iostream>
 
 const char DELIM = '|';
 
@@ -17,11 +16,21 @@ Song::Song(){
     length = new Time();
 }
 
+//------------------------------------------------------------------------------
+// Konstruktor för initiering av datamedlemmar
+//------------------------------------------------------------------------------
 Song::Song(string title, string artist, int time){
     this->title = title;
     this->artist = artist;
     length = new Time();
     length->setTime(time);
+}
+
+//------------------------------------------------------------------------------
+// Destruktor (Destructor)
+//------------------------------------------------------------------------------
+Song::~Song(){
+    delete length;
 }
 
 //------------------------------------------------------------------------------
