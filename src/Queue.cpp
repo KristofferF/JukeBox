@@ -17,7 +17,7 @@ Queue::Queue() {
 }
 
 //------------------------------------------------------------------------------
-// Kopierings kosntruktor (Copy constructor)
+// Kopierings konstruktor (Copy constructor)
 //------------------------------------------------------------------------------
 Queue::Queue(const Queue& queue) {
     size = queue.getSize();

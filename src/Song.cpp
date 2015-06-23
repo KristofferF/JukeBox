@@ -27,6 +27,16 @@ Song::Song(string title, string artist, int time){
 }
 
 //------------------------------------------------------------------------------
+// Kopierings konstruktor (Copy constructor)
+//------------------------------------------------------------------------------
+Song::Song(const Song& song){
+    this->title = song.getTitle();
+    this->artist = song.getArtist();
+    length = new Time();
+    length->setTime(song.getTime()->getTime());
+}
+
+//------------------------------------------------------------------------------
 // Destruktor (Destructor)
 //------------------------------------------------------------------------------
 Song::~Song(){

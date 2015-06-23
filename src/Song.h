@@ -14,6 +14,8 @@ using namespace std;
 
 class Song{
 private:
+
+
     string title;
     string artist;
     Time *length;
@@ -21,6 +23,7 @@ private:
 public:
     Song();
     Song(string title, string artist, int time);
+    Song(const Song &song);
     ~Song();
     string getTitle() const;
     string getArtist() const;
