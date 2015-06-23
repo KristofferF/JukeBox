@@ -21,12 +21,10 @@ public:
     Song remove();
     void emptyQueue();
     void resize();
-    bool isEmpty();
+    bool isEmpty() const;
     int getSize() const;
     Song *getSongs() const;
-
     int getFirst() const;
-
     int getLast() const;
 };
 

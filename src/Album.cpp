@@ -6,9 +6,7 @@
  */
 
 #include "Album.h"
-#include <fstream>
 #include <iomanip>
-#include <stdlib.h>
 
 //------------------------------------------------------------------------------
 // Förvald konstruktor (Default constructor)
@@ -69,7 +67,7 @@ vector<Song> Album::getSongs() const{
 int Album::getLengthOfAlbum(){
     Time time;
     for (auto& song : songs) {
-        time = time + *(song.getTime());
+        time = time + song.getTime();
     }
     return time.getTime();
 }
@@ -91,8 +89,12 @@ string Album::getPrintableTime(){
     if (minutes > 0){
         time += to_string(minutes) + ":";
     }
-
-    time += to_string(seconds);
+    if(seconds > 9){
+        time += to_string(seconds);
+    }
+    else {
+        time += "0" + to_string(seconds);
+    }
     return time;
 }
 

@@ -31,7 +31,7 @@ private:
 
     void file();
     void open();
-    void setAvailableOptions(bool enabled);
+    void setAvailableOptions();
     void save();
     void addAlbum();
     void removeAlbum();
@@ -39,8 +39,6 @@ private:
     void printAlbum();
     void printSortedAlbums(int choice);
     bool compareStrings(const string& a, const string& b);
-
-//    void printSortedAlbumsTime();
     void play();
     void createPlaylist(int choice);
     void selectSongsForPlaylist(int size, vector<int>& selections);

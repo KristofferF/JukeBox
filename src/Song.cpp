@@ -13,7 +13,7 @@ const char DELIM = '|';
 // Förvald konstruktor (Default constructor)
 //------------------------------------------------------------------------------
 Song::Song(){
-    length = new Time();
+    length = Time();
 }
 
 //------------------------------------------------------------------------------
@@ -22,25 +22,8 @@ Song::Song(){
 Song::Song(string title, string artist, int time){
     this->title = title;
     this->artist = artist;
-    length = new Time();
-    length->setTime(time);
-}
-
-//------------------------------------------------------------------------------
-// Kopierings konstruktor (Copy constructor)
-//------------------------------------------------------------------------------
-Song::Song(const Song& song){
-    this->title = song.getTitle();
-    this->artist = song.getArtist();
-    length = new Time();
-    length->setTime(song.getTime()->getTime());
-}
-
-//------------------------------------------------------------------------------
-// Destruktor (Destructor)
-//------------------------------------------------------------------------------
-Song::~Song(){
-    delete length;
+    length = Time();
+    length.setTime(time);
 }
 
 //------------------------------------------------------------------------------
@@ -64,14 +47,14 @@ string Song::getArtist() const{
 // Returnerar tiden f�r en l�t som en utskriftsv�nlig string
 //------------------------------------------------------------------------------
 string Song::getPrintableTime() const{
-    return length->getPrintableTime();
+    return length.getPrintableTime();
 }
 
 //------------------------------------------------------------------------------
 // getTime
 // Returnerar datamedlemmen length
 //------------------------------------------------------------------------------
-Time* Song::getTime() const{
+Time Song::getTime() const{
     return length;
 }
 
@@ -91,6 +74,15 @@ void Song::setArtist(string artist){
     this->artist = artist;
 }
 
+
+//------------------------------------------------------------------------------
+// setTime
+// Datamedlemmen length ges värdet av parametern time
+//------------------------------------------------------------------------------
+void Song::setTime(Time time){
+    length = time;
+}
+
 //------------------------------------------------------------------------------
 // overloaded == operator
 //
@@ -103,7 +95,7 @@ bool Song::operator==(const Song &song) const {
 // overloaded << operator
 //------------------------------------------------------------------------------
 ostream &operator<<(ostream &os, const Song &song){
-    os << song.getTitle() << DELIM << song.getArtist() << DELIM << (*song.getTime()) << endl;
+    os << song.getTitle() << DELIM << song.getArtist() << DELIM << song.getTime() << endl;
     return os;
 }
 
@@ -117,6 +109,8 @@ istream &operator>>(istream &is, Song &song) {
     song.setTitle(tmpTitle);
     getline(is, tmpArtist, DELIM);
     song.setArtist(tmpArtist);
-    is >> (*song.getTime());
+    Time time;
+    is >> time;
+    song.setTime(time);
     return is;
 }

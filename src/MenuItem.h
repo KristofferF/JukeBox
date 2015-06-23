@@ -19,7 +19,6 @@ private:
 public:
     MenuItem();
     MenuItem(string text, bool enabled);
-    void setMenuText(string text);
     string getMenuText() const;
     void setEnabled(bool enabled);
     bool getEnabled() const;

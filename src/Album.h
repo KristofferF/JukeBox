@@ -30,7 +30,6 @@ public:
     void addSong(Song song);
     bool operator<(const Album &album) const;
     int getLengthOfAlbum();
-
     string getPrintableTime();
 };
 

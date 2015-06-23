@@ -2,6 +2,7 @@
 // Created by kristoffer on 2015-06-17.
 //
 
+#include <string.h>
 #include "Queue.h"
 
 const int startSize = 5;
@@ -90,7 +91,7 @@ void Queue::resize() {
 // isEmpty
 // returnerar true om listan är tom
 //------------------------------------------------------------------------------
-bool Queue::isEmpty() {
+bool Queue::isEmpty() const{
     return last == 0;
 }
 

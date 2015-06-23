@@ -16,19 +16,11 @@ MenuItem::MenuItem(){
 }
 
 //------------------------------------------------------------------------------
-// Förvald konstruktor (Default constructor) // TODO inte f�rvald va
+// Konstruktor för initiering av datamedlemmar
 //------------------------------------------------------------------------------
 MenuItem::MenuItem(string menuText, bool enabled){
     this->menuText = menuText;
     this->enabled = enabled;
-}
-
-//------------------------------------------------------------------------------
-// setMenuText
-// Datamedlemmen text ges värdet av parametern menuText
-//------------------------------------------------------------------------------
-void MenuItem::setMenuText(string menuText){
-    this->menuText = menuText;
 }
 
 //------------------------------------------------------------------------------

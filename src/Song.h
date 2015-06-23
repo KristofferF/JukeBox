@@ -14,24 +14,21 @@ using namespace std;
 
 class Song{
 private:
-
-
     string title;
     string artist;
-    Time *length;
+    Time length;
 
 public:
     Song();
     Song(string title, string artist, int time);
-    Song(const Song &song);
-    ~Song();
     string getTitle() const;
     string getArtist() const;
-    Time* getTime() const;
+    Time getTime() const;
     void setTitle(string title);
     void setArtist(string artist);
     string getPrintableTime() const;
     bool operator==(const Song &song) const;
+    void setTime(Time time);
 };
 
 ostream &operator<<(ostream &os, const Song &song);

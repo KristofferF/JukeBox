@@ -39,7 +39,7 @@ void Menu::printMenuItems(){
 // getMenuChoices
 // L�ter anv�ndaren v�lja ett menyalternativ
 //------------------------------------------------------------------------------
-size_t Menu::getMenuChoices(){
+size_t Menu::getMenuChoices() const{
     size_t selection = 0;
     cout << "My choice: ";
     cin >> selection;

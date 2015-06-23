@@ -18,7 +18,7 @@ public:
     Menu();
     void addItem(string menuText, bool enabled);
     void printMenuItems();
-    size_t getMenuChoices();
+    size_t getMenuChoices() const;
     void setLabel(string label);
     void setAvailableOptions(bool enabled);
 };
